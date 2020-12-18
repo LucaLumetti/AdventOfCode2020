@@ -1,12 +1,6 @@
-f = open('input').readlines()
+f = [ l.replace('(','@').replace(')','(').replace('@',')')[0:-1][::-1]+"\n" for l in open('input').readlines()]
 t = 0
 for l in f:
-    l = l[0:-1][::-1] + "\n"
-    l = l.replace('(',']')
-    l = l.replace(')','[')
-    l = l.replace(']',')')
-    l = l.replace('[','(')
-
     new_str = ""
     open_b = [0]
     inside = 0
@@ -14,7 +8,6 @@ for l in f:
     for c in l:
         if c != '\n':
             new_str += c
-            continue
         if c == '*' or c == '+':
             new_str += '('
             open_b[inside] += 1
