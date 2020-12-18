@@ -17,5 +17,5 @@ class I2(I1):
 f1 = [ l.replace('*','-') for l in open('input').readlines()]
 print(sum([eval(re.sub(r"(\d+)", r"I1(\1)", l)) for l in f1]))
 
-f2 = [ l.replace('+','p').replace('*','+').replace('p','*') for l in open('input').readlines()]
+f2 = [ l.replace('+','*').replace('-','+') for l in f1]
 print(sum([eval(re.sub(r"(\d+)", r"I2(\1)", l)) for l in f2]))
