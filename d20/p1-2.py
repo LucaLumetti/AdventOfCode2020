@@ -20,8 +20,8 @@ def find_right_partner(id, tile, tiles):
         bottom_b = tile_b[-1,:]
         left_b = tile_b[:,0]
         right_b = tile_b[:,-1]
-        if((top_b == right).all()):         return id_b, np.rot90(tile_b)
-        if((top_b[::-1] == right).all()):   return id_b, np.rot90(tile_b[:,::-1])
+        if((top_b == right).all()):         return id_b, np.rot90(tile_b)[::-1,:]
+        if((top_b[::-1] == right).all()):   return id_b, np.rot90(tile_b)
 
         if((right_b == right).all()):       return id_b, np.rot90(tile_b[::-1,:],k=2)
         if((right_b[::-1] == right).all()): return id_b, np.rot90(tile_b,k=2)
@@ -105,9 +105,13 @@ result = np.array(image_id).reshape((image_shape,image_shape))
 print(result[0,0]*result[0,-1]*result[-1,0]*result[-1,-1])
 
 cut_image = np.empty(shape=(image_shape,image_shape,8,8),dtype=object)
+complete_image = np.empty(shape=(image_shape, image_shape,10,10), dtype=object)
+
 for i in range(image_shape):
     for j in range(image_shape):
         cut_image[i,j] = image[i,j,:,:][1:-1,1:-1]
+        complete_image[i,j] = image[i,j,:,:]
+
 final_image = ""
 for i in range(image_shape):
     for j in range(8):
